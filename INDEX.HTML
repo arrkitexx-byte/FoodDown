@@ -1,0 +1,1617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARKITEXX - Milk Tea & Café</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f8f3e9 0%, #f0e6d2 100%);
+            color: #5d4037;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #e8d5c4 0%, #d4a76a 100%);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #5d4037;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .logo span {
+            color: #8b5a2b;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #5d4037;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 10px;
+            border-radius: 20px;
+        }
+
+        nav a:hover {
+            color: #fff;
+            background-color: rgba(139, 90, 43, 0.3);
+            transform: translateY(-2px);
+        }
+
+        nav a.active {
+            color: #fff;
+            background-color: #8b5a2b;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: width 0.6s;
+        }
+
+        nav a:hover::before {
+            width: 100%;
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: #5d4037;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .cart-icon:hover {
+            transform: scale(1.1) rotate(5deg);
+            color: #8b5a2b;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: linear-gradient(135deg, #d4a76a 0%, #8b5a2b 100%);
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            animation: bounce 1s infinite;
+        }
+
+        /* Page Styles */
+        .page {
+            display: none;
+            padding: 2rem 0;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(93, 64, 55, 0.7), rgba(93, 64, 55, 0.7)), url('SAMPLE.508Z.png');
+            background-size: cover;
+            background-position: center;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            border-radius: 30px;
+            margin: 2rem 0;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+            animation: zoomIn 1s ease-out;
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(1.1);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, transparent 20%, rgba(255,255,255,0.1) 20%, transparent 30%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #d4a76a 0%, #8b5a2b 100%);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.4s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 1s ease-out 0.9s both;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            letter-spacing: 1px;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        /* Featured Drinks */
+        .featured-drinks {
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .featured-drinks h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #5d4037;
+            position: relative;
+            display: inline-block;
+            animation: slideInLeft 1s ease-out;
+        }
+
+        .featured-drinks h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, #d4a76a, #8b5a2b);
+            border-radius: 2px;
+        }
+
+        .drinks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .drink-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            transform-style: preserve-3d;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .drink-card:hover {
+            transform: translateY(-15px) rotateY(5deg);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .drink-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .drink-card:hover .drink-img {
+            transform: scale(1.05);
+        }
+
+        .drink-info {
+            padding: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .drink-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: #5d4037;
+        }
+
+        .drink-info p {
+            color: #8b5a2b;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        /* Menu Page */
+        .menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+            animation: slideInRight 1s ease-out;
+        }
+
+        .search-bar {
+            padding: 12px 20px;
+            border-radius: 30px;
+            border: 2px solid #e8d5c4;
+            width: 300px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .search-bar:focus {
+            outline: none;
+            border-color: #d4a76a;
+            box-shadow: 0 5px 20px rgba(212, 167, 106, 0.3);
+            transform: scale(1.02);
+        }
+
+        .categories {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            background: linear-gradient(135deg, #f0e6d2 0%, #e8d5c4 100%);
+            border: none;
+            padding: 10px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.6s;
+        }
+
+        .category-btn:hover::before {
+            left: 100%;
+        }
+
+        .category-btn.active, .category-btn:hover {
+            background: linear-gradient(135deg, #d4a76a 0%, #8b5a2b 100%);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Cart Page */
+        .cart-items {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            animation: slideInUp 0.8s ease-out;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #eee;
+            animation: slideInLeft 0.5s ease-out;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-img {
+            width: 90px;
+            height: 90px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-right: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .item-img:hover {
+            transform: scale(1.1);
+        }
+
+        .item-details {
+            flex: 1;
+        }
+
+        .item-details h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #5d4037;
+        }
+
+        .item-price {
+            color: #8b5a2b;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .quantity-btn {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: none;
+            background: linear-gradient(135deg, #f0e6d2 0%, #e8d5c4 100%);
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .quantity-btn:hover {
+            background: linear-gradient(135deg, #d4a76a 0%, #8b5a2b 100%);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .quantity {
+            min-width: 40px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .remove-btn {
+            background: none;
+            border: none;
+            color: #e74c3c;
+            cursor: pointer;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .remove-btn:hover {
+            background-color: rgba(231, 76, 60, 0.1);
+            transform: rotate(15deg);
+        }
+
+        .cart-summary {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            animation: slideInUp 0.8s ease-out 0.2s both;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .total {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #5d4037;
+            border-top: 2px solid #eee;
+            padding-top: 1rem;
+            margin-top: 1rem;
+        }
+
+        /* Loyalty Page */
+        .loyalty-card {
+            background: linear-gradient(135deg, #e8d5c4 0%, #d4a76a 100%);
+            border-radius: 30px;
+            padding: 3rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+            animation: pulseGlow 3s infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            0% {
+                box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            }
+            100% {
+                box-shadow: 0 20px 60px rgba(139, 90, 43, 0.4);
+            }
+        }
+
+        .loyalty-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, transparent 20%, rgba(255,255,255,0.1) 20%, transparent 30%);
+            animation: rotate 15s linear infinite;
+        }
+
+        .loyalty-card h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #5d4037;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
+            position: relative;
+            z-index: 2;
+        }
+
+        .stamp-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stamp {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background-color: #f8f3e9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            border: 4px solid #c19252;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .stamp:nth-child(2n) {
+            animation-delay: 0.5s;
+        }
+
+        .stamp:nth-child(3n) {
+            animation-delay: 1s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .stamp.filled {
+            background: linear-gradient(135deg, #d4a76a 0%, #8b5a2b 100%);
+            color: white;
+            transform: scale(1.1);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            animation: bounce 1s ease infinite;
+        }
+
+        .progress-text {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-top: 1rem;
+            color: #5d4037;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* About Page */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        .about-img {
+            width: 100%;
+            border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            transition: all 0.5s ease;
+            animation: fadeInLeft 1s ease-out;
+        }
+
+        .about-img:hover {
+            transform: scale(1.02) rotate(1deg);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+        }
+
+        .about-text {
+            animation: fadeInRight 1s ease-out;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #5d4037;
+        }
+
+        .mission {
+            background: linear-gradient(135deg, #d4a76a 0%, #8b5a2b 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 30px;
+            text-align: center;
+            margin: 2rem 0;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+            animation: slideInUp 1s ease-out;
+        }
+
+        .mission::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.1) 50%, transparent 60%);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        .mission p {
+            font-size: 1.5rem;
+            font-weight: 500;
+            position: relative;
+            z-index: 2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 20px;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            animation: zoomIn 0.8s ease-out;
+        }
+
+        .gallery-img:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+
+        /* Contact Page */
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .contact-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 25px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: all 0.4s ease;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .contact-card i {
+            font-size: 2.5rem;
+            color: #d4a76a;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover i {
+            transform: scale(1.2) rotate(10deg);
+            color: #8b5a2b;
+        }
+
+        .contact-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #5d4037;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f0e6d2 0%, #e8d5c4 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #5d4037;
+            font-size: 1.8rem;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .social-icon:hover {
+            background: linear-gradient(135deg, #d4a76a 0%, #8b5a2b 100%);
+            color: white;
+            transform: translateY(-10px) rotate(15deg);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        /* Popup */
+        .popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            display: none;
+            backdrop-filter: blur(5px);
+        }
+
+        .popup-content {
+            background: linear-gradient(135deg, #fff 0%, #f8f3e9 100%);
+            padding: 3rem;
+            border-radius: 30px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+            transform: scale(0.7);
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .popup.active .popup-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .popup h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #5d4037;
+        }
+
+        .popup p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .popup-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        /* Animations for different elements */
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .menu-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-bar {
+                width: 100%;
+            }
+
+            .stamp-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* Particle effect for background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: rgba(212, 167, 106, 0.6);
+            border-radius: 50%;
+            animation: floatParticle 15s infinite linear;
+        }
+
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) translateX(100px);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Particle Background -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">ARKITEXX</div>
+                <nav>
+                    <ul>
+                        <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
+                        <li><a href="#" class="nav-link" data-page="menu">Menu</a></li>
+                        <li><a href="#" class="nav-link" data-page="cart">Cart</a></li>
+                        <li><a href="#" class="nav-link" data-page="loyalty">Loyalty</a></li>
+                        <li><a href="#" class="nav-link" data-page="about">About</a></li>
+                        <li><a href="#" class="nav-link" data-page="contact">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="cart-icon" id="cartIcon">
+                    <i class="fas fa-shopping-cart fa-lg"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Home Page -->
+    <section id="home" class="page active">
+        <div class="container">
+            <div class="hero">
+                <div class="hero-content">
+                    <h1>Sip, Relax, Repeat.</h1>
+                    <p>Experience the perfect blend of taste and comfort with our premium milk teas and café specialties.</p>
+                    <a href="#" class="btn nav-link" data-page="menu">Order Now</a>
+                </div>
+            </div>
+
+            <div class="featured-drinks">
+                <h2>Featured Drinks of the Day</h2>
+                <div class="drinks-grid">
+                    <div class="drink-card">
+                        <img src="BROWN SUGAR.552Z.png" alt="Brown Sugar Milk Tea" class="drink-img">
+                        <div class="drink-info">
+                            <h3>Brown Sugar Milk Tea</h3>
+                            <p>₱120</p>
+                            <button class="btn add-to-cart" data-name="Brown Sugar Milk Tea" data-price="120" data-image="https://images.pexels.com/photos/1123663/pexels-photo-1123663.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="drink-card">
+                        <img src="MATCHA LATTE.034Z.png" alt="Matcha Latte" class="drink-img">
+                        <div class="drink-info">
+                            <h3>Matcha Latte</h3>
+                            <p>₱130</p>
+                            <button class="btn add-to-cart" data-name="Matcha Latte" data-price="130" data-image="https://images.pexels.com/photos/1435903/pexels-photo-1435903.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="drink-card">
+                        <img src="Wintermelon Milk Tea.552Z.png" alt="Wintermelon Milk Tea" class="drink-img">
+                        <div class="drink-info">
+                            <h3>Wintermelon Milk Tea</h3>
+                            <p>₱110</p>
+                            <button class="btn add-to-cart" data-name="Wintermelon Milk Tea" data-price="110" data-image="https://images.pexels.com/photos/1437629/pexels-photo-1437629.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Page -->
+    <section id="menu" class="page">
+        <div class="container">
+            <div class="menu-header">
+                <input type="text" class="search-bar" id="searchBar" placeholder="Search drinks...">
+                <div class="categories">
+                    <button class="category-btn active" data-category="all">All</button>
+                    <button class="category-btn" data-category="milktea">Milk Tea</button>
+                    <button class="category-btn" data-category="fruit">Fruit Tea</button>
+                    <button class="category-btn" data-category="coffee">Coffee</button>
+                    <button class="category-btn" data-category="snacks">Snacks</button>
+                </div>
+            </div>
+
+            <div class="drinks-grid" id="menuGrid">
+                <!-- Menu items will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Page -->
+    <section id="cart" class="page">
+        <div class="container">
+            <h2>Your Cart</h2>
+            <div class="cart-items" id="cartItems">
+                <!-- Cart items will be populated by JavaScript -->
+                <p id="emptyCartMessage">Your cart is empty. Add some delicious items!</p>
+            </div>
+            <div class="cart-summary">
+                <div class="summary-row">
+                    <span>Subtotal:</span>
+                    <span id="subtotal">₱0.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>Tax:</span>
+                    <span id="tax">₱0.00</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Total:</span>
+                    <span id="total">₱0.00</span>
+                </div>
+                <button class="btn" id="checkoutBtn" style="width: 100%; margin-top: 1rem;">Proceed to Checkout</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Loyalty Page -->
+    <section id="loyalty" class="page">
+        <div class="container">
+            <div class="loyalty-card">
+                <h2>Loyalty Rewards Program</h2>
+                <p>Buy 10 drinks, get 1 free!</p>
+                <div class="stamp-grid" id="stampGrid">
+                    <!-- Stamps will be populated by JavaScript -->
+                </div>
+                <div class="progress-text" id="progressText">0/10 stamps collected</div>
+            </div>
+            <div class="mission">
+                <p>"Affordable happiness in every cup."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Page -->
+    <section id="about" class="page">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Our Story</h2>
+                    <p>ARKITEXX was born from a passion for creating the perfect cup of milk tea. What started as a small dream in 2018 has blossomed into a beloved local café, serving the Central Visayas community with love and dedication.</p>
+                    <p>Our journey began with a simple mission: to bring joy through exceptional flavors and warm hospitality. Today, we continue that tradition with every sip and smile.</p>
+                </div>
+                <img src="CAFE1.jfif" alt="Café Interior" class="about-img">
+            </div>
+
+            <div class="mission">
+                <p>"Affordable happiness in every cup."</p>
+            </div>
+
+            <h2 style="text-align: center; margin: 2rem 0;">Our Café Gallery</h2>
+            <div class="gallery">
+                <img src="https://images.pexels.com/photos/1633525/pexels-photo-1633525.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="Café Interior" class="gallery-img">
+                <img src="https://images.pexels.com/photos/683039/pexels-photo-683039.jpeg" alt="Coffee Bar" class="gallery-img">
+                <img src="https://images.pexels.com/photos/33502825/pexels-photo-33502825.jpeg" alt="Seating Area" class="gallery-img">
+                <img src="https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="Milk Tea Display" class="gallery-img">
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Page -->
+    <section id="contact" class="page">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 2rem;">Get In Touch</h2>
+            <div class="contact-info">
+                <div class="contact-card">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Address</h3>
+                    <p>Central Visayas<br>Philippines</p>
+                </div>
+                <div class="contact-card">
+                    <i class="fas fa-phone"></i>
+                    <h3>Phone</h3>
+                    <p>+63 912 345 6789</p>
+                </div>
+                <div class="contact-card">
+                    <i class="fas fa-clock"></i>
+                    <h3>Opening Hours</h3>
+                    <p>Monday - Sunday<br>9:00 AM - 10:00 PM</p>
+                </div>
+            </div>
+
+            <div class="contact-card">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popup -->
+    <div class="popup" id="orderPopup">
+        <div class="popup-content">
+            <h3>Order Confirmation</h3>
+            <p>Your order has been placed successfully!</p>
+            <p>Thank you for choosing ARKITEXX.</p>
+            <div class="popup-buttons">
+                <button class="btn" id="closePopup">Continue Shopping</button>
+                <button class="btn" id="confirmOrder">Confirm Order</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Menu Data
+        const menuItems = [
+            { id: 1, name: "Classic Milk Tea", price: 95, category: "milktea", image: "CLASSIC MILK TEA.168Z.png" },
+            { id: 2, name: "Brown Sugar Milk Tea", price: 120, category: "milktea", image: "BROWN SUGAR.552Z.png" },
+            { id: 3, name: "Matcha Latte", price: 130, category: "milktea", image: "MATCHA LATTE.034Z.png" },
+            { id: 4, name: "Taro Milk Tea", price: 110, category: "milktea", image: "TARO MILK TEA.377Z.png" },
+            { id: 5, name: "Strawberry Fruit Tea", price: 105, category: "fruit", image: "Strawberry Fruit Tea.586Z.png" },
+            { id: 6, name: "Mango Green Tea", price: 115, category: "fruit", image: "Mango Green Tea.062Z.png" },
+            { id: 7, name: "Lemon Iced Tea", price: 95, category: "fruit", image: "Lemon Iced Tea.473Z.png" },
+            { id: 8, name: "Passion Fruit Tea", price: 120, category: "fruit", image: "Passion Fruit Tea.951Z.png" },
+            { id: 9, name: "Espresso", price: 85, category: "coffee", image: "Espresso.277Z.png" },
+            { id: 10, name: "Cappuccino", price: 110, category: "coffee", image: "Cappuccino.665Z.png" },
+            { id: 11, name: "Latte", price: 120, category: "coffee", image: "Latte.048Z.png" },
+            { id: 12, name: "Americano", price: 95, category: "coffee", image: "Americano.252Z.png" },
+            { id: 13, name: "French Fries", price: 65, category: "snacks", image: "French Fries.174Z.png" },
+            { id: 14, name: "Chicken Wings", price: 120, category: "snacks", image: "Chicken Wings.784Z.png" },
+            { id: 15, name: "Nachos", price: 95, category: "snacks", image: "Nachos.516Z.png" },
+            { id: 16, name: "Sandwich", price: 85, category: "snacks", image: "Sandwich.218Z.png" }
+        ];
+
+        // Cart and Loyalty Data
+        let cart = [];
+        let stamps = 0;
+
+        // DOM Elements
+        const pages = document.querySelectorAll('.page');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const cartIcon = document.getElementById('cartIcon');
+        const cartCount = document.getElementById('cartCount');
+        const menuGrid = document.getElementById('menuGrid');
+        const searchBar = document.getElementById('searchBar');
+        const categoryBtns = document.querySelectorAll('.category-btn');
+        const cartItems = document.getElementById('cartItems');
+        const emptyCartMessage = document.getElementById('emptyCartMessage');
+        const subtotalEl = document.getElementById('subtotal');
+        const taxEl = document.getElementById('tax');
+        const totalEl = document.getElementById('total');
+        const checkoutBtn = document.getElementById('checkoutBtn');
+        const stampGrid = document.getElementById('stampGrid');
+        const progressText = document.getElementById('progressText');
+        const orderPopup = document.getElementById('orderPopup');
+        const closePopup = document.getElementById('closePopup');
+        const confirmOrder = document.getElementById('confirmOrder');
+        const particlesContainer = document.getElementById('particles');
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCart();
+            loadStamps();
+            renderMenuItems();
+            renderStampGrid();
+            updateCartCount();
+            updateCartDisplay();
+            updateLoyaltyDisplay();
+            createParticles();
+        });
+
+        // Create floating particles
+        function createParticles() {
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                particle.style.width = (Math.random() * 6 + 4) + 'px';
+                particle.style.height = particle.style.width;
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Navigation
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const page = this.getAttribute('data-page');
+                
+                // Update active nav link
+                navLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Show active page
+                pages.forEach(p => p.classList.remove('active'));
+                document.getElementById(page).classList.add('active');
+            });
+        });
+
+        // Cart Icon Click
+        cartIcon.addEventListener('click', function() {
+            navLinks.forEach(l => l.classList.remove('active'));
+            document.querySelector('[data-page="cart"]').classList.add('active');
+            pages.forEach(p => p.classList.remove('active'));
+            document.getElementById('cart').classList.add('active');
+        });
+
+        // Add to Cart
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('add-to-cart')) {
+                const name = e.target.getAttribute('data-name');
+                const price = parseFloat(e.target.getAttribute('data-price'));
+                const image = e.target.getAttribute('data-image');
+                
+                addToCart(name, price, image);
+                updateCartCount();
+                showNotification(`${name} added to cart!`);
+            }
+        });
+
+        // Search Functionality
+        searchBar.addEventListener('input', function() {
+            renderMenuItems(this.value);
+        });
+
+        // Category Filter
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                categoryBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                const category = this.getAttribute('data-category');
+                renderMenuItems(searchBar.value, category);
+            });
+        });
+
+        // Cart Quantity Controls
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('quantity-btn')) {
+                const itemId = e.target.closest('.cart-item').getAttribute('data-id');
+                const action = e.target.getAttribute('data-action');
+                
+                if (action === 'decrease') {
+                    updateQuantity(itemId, -1);
+                } else if (action === 'increase') {
+                    updateQuantity(itemId, 1);
+                }
+            }
+            
+            if (e.target.classList.contains('remove-btn')) {
+                const itemId = e.target.closest('.cart-item').getAttribute('data-id');
+                removeFromCart(itemId);
+            }
+        });
+
+        // Checkout
+        checkoutBtn.addEventListener('click', function() {
+            if (cart.length > 0) {
+                orderPopup.style.display = 'flex';
+                setTimeout(() => {
+                    orderPopup.classList.add('active');
+                }, 10);
+            } else {
+                showNotification('Your cart is empty!');
+            }
+        });
+
+        // Popup Actions
+        closePopup.addEventListener('click', function() {
+            orderPopup.classList.remove('active');
+            setTimeout(() => {
+                orderPopup.style.display = 'none';
+            }, 500);
+        });
+
+        confirmOrder.addEventListener('click', function() {
+            // Add stamps based on number of items
+            stamps += cart.length;
+            saveStamps();
+            updateLoyaltyDisplay();
+            
+            // Clear cart
+            cart = [];
+            saveCart();
+            updateCartDisplay();
+            updateCartCount();
+            
+            orderPopup.classList.remove('active');
+            setTimeout(() => {
+                orderPopup.style.display = 'none';
+            }, 500);
+            
+            showNotification('Order confirmed! Thank you for your purchase.');
+        });
+
+        // Functions
+        function addToCart(name, price, image) {
+            const existingItem = cart.find(item => item.name === name);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: Date.now(),
+                    name: name,
+                    price: price,
+                    image: image,
+                    quantity: 1
+                });
+            }
+            
+            saveCart();
+            updateCartDisplay();
+        }
+
+        function updateQuantity(itemId, change) {
+            const item = cart.find(item => item.id == itemId);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    removeFromCart(itemId);
+                } else {
+                    saveCart();
+                    updateCartDisplay();
+                }
+            }
+        }
+
+        function removeFromCart(itemId) {
+            cart = cart.filter(item => item.id != itemId);
+            saveCart();
+            updateCartDisplay();
+            updateCartCount();
+        }
+
+        function updateCartDisplay() {
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p id="emptyCartMessage">Your cart is empty. Add some delicious items!</p>';
+                subtotalEl.textContent = '₱0.00';
+                taxEl.textContent = '₱0.00';
+                totalEl.textContent = '₱0.00';
+                return;
+            }
+            
+            let html = '';
+            let subtotal = 0;
+            
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                subtotal += itemTotal;
+                
+                html += `
+                    <div class="cart-item" data-id="${item.id}">
+                        <img src="${item.image}" alt="${item.name}" class="item-img">
+                        <div class="item-details">
+                            <h4>${item.name}</h4>
+                            <p class="item-price">₱${item.price.toFixed(2)}</p>
+                        </div>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn" data-action="decrease">-</button>
+                            <span class="quantity">${item.quantity}</span>
+                            <button class="quantity-btn" data-action="increase">+</button>
+                        </div>
+                        <button class="remove-btn"><i class="fas fa-trash"></i></button>
+                    </div>
+                `;
+            });
+            
+            cartItems.innerHTML = html;
+            
+            const tax = subtotal * 0.12;
+            const total = subtotal + tax;
+            
+            subtotalEl.textContent = `₱${subtotal.toFixed(2)}`;
+            taxEl.textContent = `₱${tax.toFixed(2)}`;
+            totalEl.textContent = `₱${total.toFixed(2)}`;
+        }
+
+        function renderMenuItems(searchTerm = '', category = 'all') {
+            let filteredItems = menuItems;
+            
+            // Filter by search term
+            if (searchTerm) {
+                filteredItems = filteredItems.filter(item => 
+                    item.name.toLowerCase().includes(searchTerm.toLowerCase())
+                );
+            }
+            
+            // Filter by category
+            if (category !== 'all') {
+                filteredItems = filteredItems.filter(item => item.category === category);
+            }
+            
+            let html = '';
+            
+            filteredItems.forEach(item => {
+                html += `
+                    <div class="drink-card">
+                        <img src="${item.image}" alt="${item.name}" class="drink-img">
+                        <div class="drink-info">
+                            <h3>${item.name}</h3>
+                            <p>₱${item.price}</p>
+                            <button class="btn add-to-cart" data-name="${item.name}" data-price="${item.price}" data-image="${item.image}">Add to Cart</button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            menuGrid.innerHTML = html;
+        }
+
+        function renderStampGrid() {
+            let html = '';
+            for (let i = 0; i < 10; i++) {
+                const filled = i < stamps;
+                html += `<div class="stamp ${filled ? 'filled' : ''}">${filled ? '<i class="fas fa-mug-hot"></i>' : ''}</div>`;
+            }
+            stampGrid.innerHTML = html;
+        }
+
+        function updateLoyaltyDisplay() {
+            renderStampGrid();
+            progressText.textContent = `${stamps}/10 stamps collected`;
+        }
+
+        function updateCartCount() {
+            const count = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCount.textContent = count;
+        }
+
+        function showNotification(message) {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.textContent = message;
+            notification.style.position = 'fixed';
+            notification.style.bottom = '20px';
+            notification.style.right = '20px';
+            notification.style.background = 'linear-gradient(135deg, #d4a76a 0%, #8b5a2b 100%)';
+            notification.style.color = 'white';
+            notification.style.padding = '15px 25px';
+            notification.style.borderRadius = '30px';
+            notification.style.boxShadow = '0 10px 25px rgba(0,0,0,0.3)';
+            notification.style.zIndex = '3000';
+            notification.style.fontWeight = '500';
+            notification.style.transform = 'translateY(100px)';
+            notification.style.opacity = '0';
+            notification.style.transition = 'all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            
+            document.body.appendChild(notification);
+            
+            // Animate in
+            setTimeout(() => {
+                notification.style.transform = 'translateY(0)';
+                notification.style.opacity = '1';
+            }, 100);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.style.transform = 'translateY(100px)';
+                notification.style.opacity = '0';
+                setTimeout(() => {
+                    notification.remove();
+                }, 500);
+            }, 3000);
+        }
+
+        // Local Storage Functions
+        function saveCart() {
+            localStorage.setItem('arkitexxCart', JSON.stringify(cart));
+        }
+
+        function loadCart() {
+            const savedCart = localStorage.getItem('arkitexxCart');
+            if (savedCart) {
+                cart = JSON.parse(savedCart);
+            }
+        }
+
+        function saveStamps() {
+            localStorage.setItem('arkitexxStamps', stamps.toString());
+        }
+
+        function loadStamps() {
+            const savedStamps = localStorage.getItem('arkitexxStamps');
+            if (savedStamps) {
+                stamps = parseInt(savedStamps);
+            }
+        }
+    </script>
+</body>
+</html>
